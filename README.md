@@ -174,7 +174,11 @@ logados em sessões separadas):
 
 ## 👥 Integrantes
 
-- RM00000 - Gustavo Moreno Coelho
+- RM556289 - Gustavo Moreno Coelho
+- RM555177 - Matheus Alves
+- RM559098 - Gustavo Atanazio
+- RM556010 - Igor Soos
+- RM556617 - Nicolas Aquino
 
 > ⚠️ **Atenção:** substitua `RM00000` pelo RM real antes de entregar —
 > sem o RM correto de todos os integrantes, o trabalho recebe nota zero
