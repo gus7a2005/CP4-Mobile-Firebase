@@ -1,0 +1,14 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+.env
+.env.local
+
+# macOS
+.DS_Store
+
+# Xcode / Android build artifacts (gerados por prebuild/EAS)
+ios/
+android/
