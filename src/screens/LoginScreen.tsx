@@ -34,16 +34,13 @@ export function LoginScreen({ navigation }: Props): React.JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [, googleResponse, promptGoogleAsync] = Google.useAuthRequest({
+  const [, googleResponse, promptGoogleAsync] = Google.useIdTokenAuthRequest({
     webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
     iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
     androidClientId: process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID,
   });
 
-  const isAppleAvailable = useMemo(
-    () => Platform.OS === "ios",
-    []
-  );
+  const isAppleAvailable = useMemo(() => Platform.OS === "ios", []);
 
   const handleEmailLogin = useCallback(async () => {
     if (!email.trim() || !password) {
@@ -69,7 +66,8 @@ export function LoginScreen({ navigation }: Props): React.JSX.Element {
       if (result.type !== "success") {
         return;
       }
-      const idToken = result.authentication?.idToken;
+      // No fluxo de id_token puro (web), o token vem em params, não em `authentication`.
+      const idToken = result.authentication?.idToken ?? result.params?.id_token;
       if (!idToken) {
         setError("Não foi possível obter as credenciais do Google.");
         return;

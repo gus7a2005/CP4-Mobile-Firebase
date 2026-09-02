@@ -1,6 +1,8 @@
+import { Platform } from "react-native";
 import { initializeApp, getApps, type FirebaseOptions } from "firebase/app";
 import {
   initializeAuth,
+  getAuth,
   getReactNativePersistence,
   type Auth,
 } from "firebase/auth";
@@ -23,13 +25,17 @@ const firebaseConfig: FirebaseOptions = {
   appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const app =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
-// initializeAuth com persistência em AsyncStorage garante que a sessão
-// sobreviva ao fechamento do app no React Native (getAuth sozinho não persiste).
-export const auth: Auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
-});
+// getReactNativePersistence não existe no build web do SDK; getAuth já
+// usa persistência em localStorage/indexedDB nativamente nesse ambiente.
+export const auth: Auth =
+  Platform.OS === "web"
+    ? getAuth(app)
+    : initializeAuth(app, {
+        persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+      });
 
 export const database: Database = getDatabase(app);
 

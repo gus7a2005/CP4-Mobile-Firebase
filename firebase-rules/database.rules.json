@@ -10,7 +10,7 @@
 
     "conversations": {
       "$conversationId": {
-        ".read": "auth != null && (data.child('participants/0').val() === auth.uid || data.child('participants/1').val() === auth.uid)",
+        ".read": "auth != null && (!data.exists() || data.child('participants/0').val() === auth.uid || data.child('participants/1').val() === auth.uid)",
         ".write": "auth != null && (newData.child('participants/0').val() === auth.uid || newData.child('participants/1').val() === auth.uid)",
         ".validate": "newData.hasChildren(['id', 'participants', 'createdAt']) && newData.child('participants').hasChildren(['0', '1'])"
       }
