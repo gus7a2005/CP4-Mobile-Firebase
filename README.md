@@ -179,6 +179,7 @@ logados em sessões separadas):
 - RM559098 - Gustavo Atanazio
 - RM556010 - Igor Soos
 - RM556617 - Nicolas Aquino
+- RM558023 - Dayana Quispe
 
 > ⚠️ **Atenção:** substitua `RM00000` pelo RM real antes de entregar —
 > sem o RM correto de todos os integrantes, o trabalho recebe nota zero
